@@ -362,6 +362,7 @@
 
     <script>
         let id = SalesforceInteractions.getAnonymousId();
+        console.log('Salesforce any Id ' + id)
         let britannia_international_link = "https://britannia-international.vercel.app/?utm_id="+id;
         document.getElementById('BI').href = britannia_international_link;
         const tabs = document.querySelectorAll(".tab-btn");
