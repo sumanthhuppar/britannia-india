@@ -11,6 +11,7 @@
     <script>
         let uuid = SalesforceInteractions.getAnonymousId();
         let britannia_international_link = "https://britannia-international.vercel.app/?utm_id="+uuid;
+        document.getElementById('BI').href = britannia_international_link;
     </script>
 </head>
 <body>
@@ -22,7 +23,7 @@
                 <a href="#" class="nav-link">RECIPES</a>
                 <a href="/about.html" class="nav-link">ABOUT US</a>
                 <!-- <a href="https://britannia-international.vercel.app/?utm_id=25b236559a49f240" class="nav-link">Visit Britannia International</a> -->
-                 <a href=britannia_international_link class="nav-link">Visit Britannia International</a>
+                 <a id="BI" href="#" class="nav-link">Visit Britannia International</a>
             </div>
             <div class="logo">
                 <a href="/">
