@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Your Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="text/javascript" async src="//cdn.evgnet.com/beacon/kasmotechnologies/britannia/scripts/evergage.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      /* margin: 0; */
+    }
+    .container{
+      display: flex;
+    }
+
+    .sidebar {
+      width: 200px;
+      background: #fff;
+      margin-top: 8%;
+      padding: 10px;
+      border-right: 2px solid #eee;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      background-color: #d82c2c;
+      color: white;
+      cursor: pointer;
+    }
+
+    .sidebar button.active {
+      border: 2px solid #d82c2c;
+      background-color: #fff;
+      color: #d82c2c;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      margin-top: 8%;
+    }
+
+    .product-section {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .product-section.active {
+      display: grid;
+    }
+
+    .product-card {
+      text-align: center;
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img {
+      max-width: 150px;
+      height: auto;
+    }
+
+    .product-card p {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .header {
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.7rem;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #e74c3c;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .cta-button {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: small;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cta-button:hover {
+      background: #c0392b;
+    }
+
+    /* Joint Ventures */
+    .joint-ventures {
+      padding: 60px 0;
+    }
+
+    .joint-ventures h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: #2c3e50;
+    }
+
+    .ventures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .venture-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .venture-card img {
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .venture-card h3 {
+      color: #e74c3c;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .venture-card h4 {
+      color: #2c3e50;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .venture-card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: #f39c12;
+      color: #2c3e50;
+      padding: 40px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section ul li a {
+      color: #2c3e50;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #e74c3c;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .social-media {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-100 to-yellow-50 min-h-screen flex flex-col justify-center p-4 font-sans">
+
+    <header class="header">
+        <nav class="navbar">
+          <div class="nav-left">
+            <a href="#" class="nav-link">PRODUCTS</a>
+            <a href="#" class="nav-link">RECIPES</a>
+            <a href="#" class="nav-link">ABOUT US</a>
+            <a href="#" class="nav-link">WHAT MAKES US DIFFERENT</a>
+          </div>
+          <div class="logo">
+            <a href="/">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Britannia_Industries_logo.svg/1200px-Britannia_Industries_logo.svg.png"
+                alt="Britannia">
+            </a>
+          </div>
+          <div class="nav-right">
+            <a href="#" class="nav-link">INVESTORS</a>
+            <a href="#" class="nav-link">CAREERS</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+            <button class="cta-button">CONTACT US</button>
+          </div>
+        </nav>
+      </header>
+
+  <!-- Form -->
+  <form id="contactForm" class="bg-white p-5 rounded-2xl shadow-lg max-w-5xl mx-auto border border-yellow-200 grid grid-cols-3 gap-3 text-sm" style="margin-top:61px; max-height:95vh; overflow:hidden;">
+
+    <h2 class="col-span-3 text-lg font-bold text-gray-800 mb-1">Submit Your Details</h2>
+
+    <div>
+      <label for="firstName" class="block text-xs text-gray-700 mb-1">First Name*</label>
+      <input type="text" id="firstName" name="firstName" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="lastName" class="block text-xs text-gray-700 mb-1">Last Name*</label>
+      <input type="text" id="lastName" name="lastName" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="mobile" class="block text-xs text-gray-700 mb-1">Mobile No.*</label>
+      <input type="tel" id="mobile" name="mobile" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+
+    <div>
+      <label for="altMobile" class="block text-xs text-gray-700 mb-1">Alternate Mobile No.</label>
+      <input type="tel" id="altMobile" name="altMobile" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm">
+    </div>
+    <div>
+      <label for="email" class="block text-xs text-gray-700 mb-1">Email*</label>
+      <input type="email" id="email" name="email" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="address" class="block text-xs text-gray-700 mb-1">Address*</label>
+      <input type="text" id="address" name="address" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+
+    <div>
+      <label for="city" class="block text-xs text-gray-700 mb-1">City*</label>
+      <input type="text" id="city" name="city" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="state" class="block text-xs text-gray-700 mb-1">State*</label>
+      <select id="state" name="state" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+        <option value="">Select</option>
+        <option>Karnataka</option>
+        <option>Tamil Nadu</option>
+        <option>Maharashtra</option>
+      </select>
+    </div>
+    <div>
+      <label for="pincode" class="block text-xs text-gray-700 mb-1">Pincode*</label>
+      <input type="text" id="pincode" name="pincode" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+
+    <div>
+      <label for="productName" class="block text-xs text-gray-700 mb-1">Product Name*</label>
+      <input type="text" id="productName" name="productName" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="lotNo" class="block text-xs text-gray-700 mb-1">Lot No.*</label>
+      <input type="text" id="lotNo" name="lotNo" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="packedOn" class="block text-xs text-gray-700 mb-1">Packed On</label>
+      <input type="date" id="packedOn" name="packedOn" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm">
+    </div>
+
+    <div>
+      <label for="productCity" class="block text-xs text-gray-700 mb-1">Product City*</label>
+      <input type="text" id="productCity" name="productCity" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="storeName" class="block text-xs text-gray-700 mb-1">Store Name*</label>
+      <input type="text" id="storeName" name="storeName" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm" required>
+    </div>
+    <div>
+      <label for="area" class="block text-xs text-gray-700 mb-1">Area</label>
+      <input type="text" id="area" name="area" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm">
+    </div>
+
+    <div>
+      <label for="uploadPicture" class="block text-xs text-gray-700 mb-1">Upload Picture</label>
+      <input type="file" id="uploadPicture" name="file" class="w-full border rounded-lg p-1 focus:ring-2 focus:ring-yellow-400 outline-none text-sm">
+    </div>
+    <div class="col-span-2">
+      <label for="issue" class="block text-xs text-gray-700 mb-1">Issue</label>
+      <textarea id="issue" name="issue" rows="1" class="w-full border rounded-lg p-1.5 focus:ring-2 focus:ring-yellow-400 outline-none text-sm"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-span-3 flex justify-center mt-1">
+      <button id="submitBtn" type="submit" class="bg-red-500 hover:bg-red-600 text-white px-5 py-1.5 rounded-lg shadow-lg transition duration-300 text-sm flex items-center justify-center gap-2">
+        Submit
+      </button>
+    </div>
+  </form>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const btn = document.getElementById("submitBtn");
+
+  // Loading spinner state
+  btn.disabled = true;
+  btn.innerHTML = `<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>`;
+
+  setTimeout(() => {
+    // Success state with checkmark and text
+    btn.classList.remove("bg-red-500", "hover:bg-red-600");
+    btn.classList.add("bg-green-500");
+    btn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <span>Submitted</span>
+    `;
+    btn.classList.add("flex", "items-center", "justify-center", "gap-2");
+  }, 2000);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" async src="//cdn.evgnet.com/beacon/kasmotechnologies/britannia/scripts/evergage.min.js"></script>
+  <title>Britannia Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .container{
+      display: flex;
+    }
+
+    .sidebar {
+      width: 200px;
+      background: #fff;
+      margin-top: 8%;
+      padding: 10px;
+      border-right: 2px solid #eee;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      background-color: #d82c2c;
+      color: white;
+      cursor: pointer;
+    }
+
+    .sidebar button.active {
+      border: 2px solid #d82c2c;
+      background-color: #fff;
+      color: #d82c2c;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      margin-top: 8%;
+    }
+
+    .product-section {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .product-section.active {
+      display: grid;
+    }
+
+    .product-card {
+      text-align: center;
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img {
+      max-width: 150px;
+      height: auto;
+    }
+
+    .product-card p {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .header {
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #e74c3c;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .cta-button {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cta-button:hover {
+      background: #c0392b;
+    }
+
+    /* Joint Ventures */
+    .joint-ventures {
+      padding: 60px 0;
+    }
+
+    .joint-ventures h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: #2c3e50;
+    }
+
+    .ventures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .venture-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .venture-card img {
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .venture-card h3 {
+      color: #e74c3c;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .venture-card h4 {
+      color: #2c3e50;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .venture-card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: #f39c12;
+      color: #2c3e50;
+      padding: 40px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section ul li a {
+      color: #2c3e50;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #e74c3c;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .social-media {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-left">
+          <a href="#" class="nav-link">PRODUCTS</a>
+          <a href="#" class="nav-link">RECIPES</a>
+          <a href="#" class="nav-link">ABOUT US</a>
+          <a href="#" class="nav-link">WHAT MAKES US DIFFERENT</a>
+        </div>
+        <div class="logo">
+          <a href="/">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Britannia_Industries_logo.svg/1200px-Britannia_Industries_logo.svg.png"
+              alt="Britannia">
+          </a>
+        </div>
+        <div class="nav-right">
+          <a href="#" class="nav-link">INVESTORS</a>
+          <a href="#" class="nav-link">CAREERS</a>
+          <a href="#" class="nav-link">CONTACT US</a>
+          <button id="header-cta-btn" class="cta-button">CONTACT US</button>
+        </div>
+      </nav>
+    </header>
+    <div class="sidebar">
+      <button id="biscuits-btn" class="active" onclick="showSection('biscuits')">BISCUITS</button>
+      <button id="dairy-btn" onclick="showSection('dairy')">DAIRY</button>
+      <button id="snacking-btn" onclick="showSection('snacking')">SNACKING</button>
+      <button id="cakes-btn" onclick="showSection('cakes')">CAKES</button>
+      <button id="rusk-btn" onclick="showSection('rusk')">RUSK</button>
+      <button id="breads-btn" onclick="showSection('breads')">BREADS</button>
+      <button id="bars-btn" onclick="showSection('bars')">NUTRITIOUS BARS</button>
+    </div>
+    <div class="main-content">
+      <div id="biscuits" class="product-section active">
+        <div class="product-card">
+          <a href="/product.html">
+            <img
+              src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FGood_Day_Butter_Pack_306616402a.png&w=384&q=100"
+              alt="Good Day"></a>
+          <p>GOOD DAY</p>
+
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FMarie_Marie_Gold_Pack_63a738e5fc.png&w=384&q=100"
+            alt="Marie Gold">
+          <p>MARIE GOLD</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FNutri_Choice_Digestive_4567fbc6a1.png&w=384&q=100"
+            alt="NutriChoice">
+          <p>NUTRICHOICE</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FMilk_Bikis_e8d2d3c4ff.png&w=384&q=100"
+            alt="Milk Bikis">
+          <p>MILK BIKIS</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FTiger_Kreemz_Krunch_Choco_Chips_Pack_88614e034b.png&w=384&q=100"
+            alt="Tiger">
+          <p>TIGER</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2F5050_Sweet_1f99df48bd.png&w=384&q=100"
+            alt="50-50">
+          <p>50-50</p>
+        </div>
+      </div>
+
+      <div id="dairy" class="product-section">
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FBri_Cheese_Slices_200g_3a28116e01.png&w=256&q=100"
+            alt="Cheese Slices">
+          <p>Cheese Slices</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FWinkin_Cow_Winkin_Shake_Strawberry_Pack_new_86a255fcda.jpg&w=256&q=100"
+            alt="Winkins' Milk">
+          <p>Winkin' Cow</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FDiary_Whitener_Pouch_Pack_54e2107f88.png&w=256&q=100"
+            alt="Dairy Whitener">
+          <p>Dairy Whitener</p>
+        </div>
+      </div>
+
+      <div id="snacking" class="product-section">
+        <div class="product-card">
+          <p>Snacking products go here</p>
+        </div>
+      </div>
+      <div id="cakes" class="product-section">
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FGobbles_Choco_Pack_6887befb99.png&w=256&q=100"
+            alt="Gobbles">
+          <p>Gobbles</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FFudge_It_Pack_8e163dcbef.png&w=256&q=100"
+            alt="Cheese Slices">
+          <p>Fudge it</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.britannia.co.in/_next/image?url=https%3A%2F%2Fmedia.britannia.co.in%2FRoll_Yo_Choco_Vanilla_Swiss_Roll_Pack_17db7972d0.png&w=256&q=100"
+            alt="Cheese Slices">
+          <p>Roll Yo</p>
+        </div>
+      </div>
+      <div id="rusk" class="product-section">
+        <div class="product-card">
+          <p>Rusk products go here</p>
+        </div>
+      </div>
+      <div id="breads" class="product-section">
+        <div class="product-card">
+          <p>Bread products go here</p>
+        </div>
+      </div>
+      <div id="bars" class="product-section">
+        <div class="product-card">
+          <p>Nutritious bars go here</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </div>
+  </div>
+  <!-- Joint Ventures -->
+  <section class="joint-ventures">
+    <div class="container">
+      <h2>JOINT VENTURES</h2>
+      <div class="ventures-grid">
+        <div class="venture-card">
+          <img src="/placeholder.svg?height=80&width=120" alt="Britannia">
+          <h3>BRITANNIA</h3>
+          <h4>CHIPITA FOODS LIMITED</h4>
+          <p>Britannia Chipita Foods Limited was incorporated in 2019 with the objective of manufacturing and marketing
+            croissants in India.</p>
+          <button id="chipita-read-more" class="read-more-btn">READ MORE</button>
+        </div>
+        <div class="venture-card">
+          <img src="/placeholder.svg?height=80&width=120" alt="Bel">
+          <h3>BRITANNIA BEL FOODS PRIVATE LIMITED</h3>
+          <p>Britannia entered into a joint venture with Bel SA, France for manufacturing and marketing of cheese
+            products in India.</p>
+          <button id="bel-read-more" class="read-more-btn">READ MORE</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>PRODUCTS</h4>
+          <ul>
+            <li><a href="#">Biscuits</a></li>
+            <li><a href="#">Cakes</a></li>
+            <li><a href="#">Rusk</a></li>
+            <li><a href="#">Bread</a></li>
+            <li><a href="#">Dairy</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>COMPANY</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Leadership</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Press Release</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>CONNECT</h4>
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Locate Us</a></li>
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Customer Care</a></li>
+          </ul>
+        </div>
+        <div class="footer-section contact-info">
+          <p>📞 1-800-266-4444</p>
+          <p>📞 1-800-266-0000</p>
+          <p>✉️ consumer@britannia.co.in</p>
+          <div class="social-media">
+            <a href="#" class="social-link">📘</a>
+            <a href="#" class="social-link">📷</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">📺</a>
+            <a href="#" class="social-link">💼</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.product-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.querySelectorAll('.sidebar button').forEach(button => {
+        button.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+      document.querySelector(`.sidebar button[onclick*="${sectionId}"]`).classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
