@@ -8,11 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" async src="//cdn.evgnet.com/beacon/kasmotechnologies/britanniademo/scripts/evergage.min.js"></script>
-    <script>
-        let id = SalesforceInteractions.getAnonymousId();
-        let britannia_international_link = "https://britannia-international.vercel.app/?utm_id="+id;
-        document.getElementById('BI').href = britannia_international_link;
-    </script>
 </head>
 <body>
     <!-- Header -->
@@ -366,6 +361,9 @@
 
 
     <script>
+        let id = SalesforceInteractions.getAnonymousId();
+        let britannia_international_link = "https://britannia-international.vercel.app/?utm_id="+id;
+        document.getElementById('BI').href = britannia_international_link;
         const tabs = document.querySelectorAll(".tab-btn");
         const contents = document.querySelectorAll(".tab-content");
       
@@ -385,7 +383,7 @@
           });
         });
       </script>
-    <script>
+    <!-- <script>
           // Your code here
           function setUTMParam(name, value) {
                 const url = new URL(window.location.href);
@@ -394,6 +392,6 @@
             }
             let anonymousId = SalesforceInteractions.getAnonymousId();
             setUTMParam('utm_id', anonymousId);
-      </script>
+      </script> -->
 </body>
 </html>
