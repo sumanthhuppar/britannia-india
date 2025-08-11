@@ -379,18 +379,23 @@
     </footer>
     <script>
         // Function to set query parameter without reloading
+        
         function setUTMParam(name, value) {
             const url = new URL(window.location.href);
             url.searchParams.set(name, value);
             window.history.replaceState({}, '', url);
         }
+
+        let anonymousId = SalesforceInteractions.getAnonymousId();
+
+        setUTMParam('utm_id', anonymousId);
     
         // Get Salesforce anonymous ID and set it as utm_id
-        SalesforceInteractions.getAnonymousId().then(function(anonId) {
-            if (anonId) {
-                setUTMParam('utm_id', anonId);
-            }
-        });
+        // SalesforceInteractions.getAnonymousId().then(function(anonId) {
+        //     if (anonId) {
+        //         setUTMParam('utm_id', anonId);
+        //     }
+        // });
     </script>
     
     
