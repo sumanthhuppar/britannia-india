@@ -380,18 +380,14 @@
         });
       </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
           // Your code here
           function setUTMParam(name, value) {
                 const url = new URL(window.location.href);
                 url.searchParams.set(name, value);
                 window.history.replaceState({}, '', url);
             }
-    
             let anonymousId = SalesforceInteractions.getAnonymousId();
-    
             setUTMParam('utm_id', anonymousId);
-        });
       </script>
 </body>
 </html>
