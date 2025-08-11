@@ -8,6 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" async src="//cdn.evgnet.com/beacon/kasmotechnologies/britanniademo/scripts/evergage.min.js"></script>
+    <script>
+        let uuid = SalesforceInteractions.getAnonymousId();
+        let britannia_international_link = "https://britannia-international.vercel.app/?utm_id="+uuid;
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -17,7 +21,8 @@
                 <a href="/product-list.html" class="nav-link">PRODUCTS</a>
                 <a href="#" class="nav-link">RECIPES</a>
                 <a href="/about.html" class="nav-link">ABOUT US</a>
-                <a href="https://britannia-international.vercel.app/?utm_id=25b236559a49f240" class="nav-link">Visit Britannia International</a>
+                <!-- <a href="https://britannia-international.vercel.app/?utm_id=25b236559a49f240" class="nav-link">Visit Britannia International</a> -->
+                 <a href=britannia_international_link class="nav-link">Visit Britannia International</a>
             </div>
             <div class="logo">
                 <a href="/">
