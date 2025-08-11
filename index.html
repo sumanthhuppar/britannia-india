@@ -283,26 +283,6 @@
     </div>
   </section>
   
-  <script>
-    const tabs = document.querySelectorAll(".tab-btn");
-    const contents = document.querySelectorAll(".tab-content");
-  
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        // Reset active tab
-        tabs.forEach(t => t.classList.remove("bg-red-500", "text-white"));
-        tabs.forEach(t => t.classList.add("bg-white", "border", "border-gray-300", "text-black"));
-  
-        // Set active tab
-        tab.classList.remove("bg-white", "border", "border-gray-300", "text-black");
-        tab.classList.add("bg-red-500", "text-white");
-  
-        // Show corresponding content
-        contents.forEach(c => c.classList.add("hidden"));
-        document.getElementById(tab.dataset.tab).classList.remove("hidden");
-      });
-    });
-  </script>
   
   
 
@@ -378,21 +358,40 @@
         </div>
     </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Your code here
-      function setUTMParam(name, value) {
-            const url = new URL(window.location.href);
-            url.searchParams.set(name, value);
-            window.history.replaceState({}, '', url);
-        }
 
-        let anonymousId = SalesforceInteractions.getAnonymousId();
-
-        setUTMParam('utm_id', anonymousId);
-    });
-  </script>
+    <script>
+        const tabs = document.querySelectorAll(".tab-btn");
+        const contents = document.querySelectorAll(".tab-content");
+      
+        tabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+            // Reset active tab
+            tabs.forEach(t => t.classList.remove("bg-red-500", "text-white"));
+            tabs.forEach(t => t.classList.add("bg-white", "border", "border-gray-300", "text-black"));
+      
+            // Set active tab
+            tab.classList.remove("bg-white", "border", "border-gray-300", "text-black");
+            tab.classList.add("bg-red-500", "text-white");
+      
+            // Show corresponding content
+            contents.forEach(c => c.classList.add("hidden"));
+            document.getElementById(tab.dataset.tab).classList.remove("hidden");
+          });
+        });
+      </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // Your code here
+          function setUTMParam(name, value) {
+                const url = new URL(window.location.href);
+                url.searchParams.set(name, value);
+                window.history.replaceState({}, '', url);
+            }
     
+            let anonymousId = SalesforceInteractions.getAnonymousId();
     
+            setUTMParam('utm_id', anonymousId);
+        });
+      </script>
 </body>
 </html>
