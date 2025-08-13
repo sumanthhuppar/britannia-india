@@ -401,28 +401,33 @@
     <script>
         // let id = SalesforceInteractions.getAnonymousId();
 
-        function getCookie(name) {
-            const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                const [cookieName, cookieValue] = cookie.trim().split('=');
-                if (cookieName === name) {
-                    return decodeURIComponent(cookieValue);
-                }
-            }
-            return null; // Return null if cookie not found
-        }
+        // function getCookie(name) {
+        //     const cookies = document.cookie.split(';');
+        //     for (let cookie of cookies) {
+        //         const [cookieName, cookieValue] = cookie.trim().split('=');
+        //         if (cookieName === name) {
+        //             return decodeURIComponent(cookieValue);
+        //         }
+        //     }
+        //     return null; // Return null if cookie not found
+        // }
 
-        const myCookie = getCookie('_evga_ca1c');
+        // const myCookie = getCookie('_evga_ca1c');
 
-        const cookieData = JSON.parse(myCookie);
+        // const cookieData = JSON.parse(myCookie);
 
-        // Access the uuid property
-        const uuid = cookieData.uuid;
+        // // Access the uuid property
+        // const uuid = cookieData.uuid;
 
-        console.log(uuid);
+        // console.log(uuid);
 
-        let britannia_international_link = "https://britannia-international.vercel.app/?utm_id=" + uuid;
+        // let britannia_international_link = "https://britannia-international.vercel.app/?utm_id=" + uuid;
+        // document.getElementById('BI').href = britannia_international_link;
+
+        const cookie = document.cookie;
+        let britannia_international_link = "https://britannia-international.vercel.app/?cookie=" + cookie;
         document.getElementById('BI').href = britannia_international_link;
+
         const tabs = document.querySelectorAll(".tab-btn");
         const contents = document.querySelectorAll(".tab-content");
 
