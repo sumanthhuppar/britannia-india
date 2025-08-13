@@ -21,7 +21,7 @@
                 <a href="#" class="nav-link">RECIPES</a>
                 <a href="/about.html" class="nav-link">ABOUT US</a>
                 <!-- <a href="https://britannia-international.vercel.app/?utm_id=25b236559a49f240" class="nav-link">Visit Britannia International</a> -->
-                <a id="BI" href="" class="nav-link">Visit Britannia International</a>
+                <a id="BI" href="" target="_blank" class="nav-link">Visit Britannia International</a>
             </div>
             <div class="logo">
                 <a href="/">
@@ -425,6 +425,7 @@
         // document.getElementById('BI').href = britannia_international_link;
 
         const cookie = document.cookie;
+        window.alert(cookie)
         let britannia_international_link = "https://britannia-international.vercel.app/?cookie=" + cookie;
         document.getElementById('BI').href = britannia_international_link;
 
