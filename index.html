@@ -424,10 +424,64 @@
         // let britannia_international_link = "https://britannia-international.vercel.app/?utm_id=" + uuid;
         // document.getElementById('BI').href = britannia_international_link;
 
-        const cookie = document.cookie;
-        console.log(cookie)
-        let britannia_international_link = "https://britannia-international.vercel.app/?cookie=" + cookie;
-        document.getElementById('BI').href = britannia_international_link;
+
+        // puid link generation
+        function getCookie(name) {
+
+            const value = `; ${document.cookie}`;
+
+            const parts = value.split(`; ${name}=`);
+
+            if (parts.length === 2) return parts.pop().split(';').shift();
+
+        }
+
+        const evga = getCookie('_evga_ca1c');
+
+        if (evga) {
+
+            try {
+
+                const decoded = decodeURIComponent(evga);
+
+                const json = JSON.parse(decoded);
+
+                // Build the URL with query parameters from the JSON object
+
+                const baseUrl = 'https://britannia-international.vercel.app/';
+
+                const params = new URLSearchParams(json);
+
+                const fullUrl = `${baseUrl}?${params.toString()}`;
+
+                console.log('Redirecting to:', fullUrl);
+
+                // Optionally redirect:
+
+                // window.location.href = fullUrl;
+
+            } catch (error) {
+
+                console.error('Failed to decode or parse _evga_ca1c cookie:', error);
+
+            }
+
+        } else {
+
+            console.warn('_evga_ca1c cookie not found');
+
+        }
+
+
+
+        // end
+        
+        let britannia_international_link = fullUrl;
+        
+        // const cookie = document.cookie;
+        // console.log(cookie)
+        // let britannia_international_link = "https://britannia-international.vercel.app/?cookie=" + cookie;
+        // document.getElementById('BI').href = britannia_international_link;
 
         const tabs = document.querySelectorAll(".tab-btn");
         const contents = document.querySelectorAll(".tab-content");
