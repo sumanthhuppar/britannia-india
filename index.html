@@ -426,65 +426,82 @@
 
 
         // puid link generation
-        function getCookie(name) {
+        // function getCookie(name) {
+        //     const value = `; ${document.cookie}`;
+        //     const parts = value.split(`; ${name}=`);
+        //     if (parts.length === 2) return parts.pop().split(';').shift();
+        // }
 
-            const value = `; ${document.cookie}`;
-
-            const parts = value.split(`; ${name}=`);
-
-            if (parts.length === 2) return parts.pop().split(';').shift();
-
-        }
-
-        const evga = getCookie('_evga_ca1c');
-
-        if (evga) {
-
-            try {
-
-                const decoded = decodeURIComponent(evga);
-
-                const json = JSON.parse(decoded);
-
-                // Build the URL with query parameters from the JSON object
-
-                const baseUrl = 'https://britannia-international.vercel.app/';
-
-                const params = new URLSearchParams(json);
-
-                const fullUrl = `${baseUrl}?${params.toString()}`;
-
-                console.log('Redirecting to:', fullUrl);
-
-                let britannia_international_link = fullUrl;
-                document.getElementById('BI').href = britannia_international_link;
-
-                // Optionally redirect:
-
-                // window.location.href = fullUrl;
-
-            } catch (error) {
-
-                console.error('Failed to decode or parse _evga_ca1c cookie:', error);
-
-            }
-
-        } else {
-
-            console.warn('_evga_ca1c cookie not found');
-
-        }
+        // const evga = getCookie('_evga_ca1c');
+        // if (evga) {
+        //     try {
+        //         const decoded = decodeURIComponent(evga);
+        //         const json = JSON.parse(decoded);
+        //         // Build the URL with query parameters from the JSON object
+        //         const baseUrl = 'https://britannia-international.vercel.app/';
+        //         const params = new URLSearchParams(json);
+        //         const fullUrl = `${baseUrl}?${params.toString()}`;
+        //         console.log('Redirecting to:', fullUrl);
+        //         let britannia_international_link = fullUrl;
+        //         document.getElementById('BI').href = britannia_international_link;
+        //         // Optionally redirect:
+        //         // window.location.href = fullUrl;
+        //     } catch (error) {
+        //         console.error('Failed to decode or parse _evga_ca1c cookie:', error);
+        //     }
+        // } else {
+        //     console.warn('_evga_ca1c cookie not found');
+        // }
 
 
 
         // end
-        
-        
+
+
 
         // const cookie = document.cookie;
         // console.log(cookie)
         // let britannia_international_link = "https://britannia-international.vercel.app/?cookie=" + cookie;
         // document.getElementById('BI').href = britannia_international_link;
+
+        function setUuidPuidInUrl() {
+            const cookies = document.cookie.split(";");
+            console.log(cookies)
+            let uuid = null, puid = null, affinityId = null;
+
+            cookies.forEach(cookie => {
+                if (cookie.startsWith("_evga") || cookie.startsWith(" _evga")) {
+                    console.log(true)
+                    try {
+                        const value = decodeURIComponent(cookie.split("=")[1]);
+                        console.log(value)
+                        const parsed = JSON.parse(value);
+                        console.log(parsed + "--" + parsed.uuid + "--" + parsed.puid)
+                        if (parsed.uuid) uuid = parsed.uuid;
+                        if (parsed.puid) puid = parsed.puid;
+                        if (parsed.affinityId) affinityId = parsed.affinityId;
+                        console.log("affinityId---" + parsed.affinityId);
+                    } catch (e) {
+                        console.warn("Skipping invalid cookie:", cookie);
+                    }
+                }
+                console.log("uuid : " + uuid + " puid : " + puid)
+            });
+
+            if (uuid && puid) {
+                const Url = `https://britannia-international.vercel.app/`;
+                const newUrl = Url + `?uuid=${uuid}&puid=${puid}&affinityId=${affinityId}`
+                document.getElementById('BI').href = newUrl;
+                // window.open(newUrl, "_blank");
+            } else if (uuid && !puid) {
+                const Url = `https://britannia-international.vercel.app/`;
+                const newUrl = Url + `?uuid=${uuid}`
+                document.getElementById('BI').href = newUrl;
+                // window.location.href = newUrl.toString();
+                // window.open(newUrl, "_blank");
+            }
+        }
+        setUuidPuidInUrl();
 
         const tabs = document.querySelectorAll(".tab-btn");
         const contents = document.querySelectorAll(".tab-content");
